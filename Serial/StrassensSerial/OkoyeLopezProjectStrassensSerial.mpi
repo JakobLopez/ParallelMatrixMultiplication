@@ -1,0 +1,71 @@
+# Numpy is a library for fast array/matrix operations
+import numpy as np
+import time
+
+def split(matrix):
+  """
+  Splits a matrix into 4 sub matrices
+
+  Parameters:
+    matrix - nxn matrix 
+
+  Returns:
+    tuple of individual sub matrices
+  """
+  upper_half = np.hsplit(np.vsplit(matrix, 2)[0], 2)
+  lower_half = np.hsplit(np.vsplit(matrix, 2)[1], 2)
+
+  upper_left = upper_half[0]
+  upper_right = upper_half[1]
+  lower_left = lower_half[0]
+  lower_right = lower_half[1]
+  return upper_left, upper_right, lower_left, lower_right
+
+def strassens(m1, m2):
+  """
+  Performs strassens matrix multiplication algorithm
+
+  Parameters:
+    m1 - first nxn matrix where n is power of 2
+    m2 - seconds nxn matrix where n is power of 2
+  
+  Returns:
+    Result of matrix multiplication
+  """
+  A, B, C, D = split(m1)
+  E, F, G, H = split(m2)
+
+  if m1.shape[0] == 256:
+    return np.matmul(m1, m2)
+
+  # Strassens algorithm equations
+  p1 = strassens(A, F - H)
+  p2 = strassens(A + B, H)
+  p3 = strassens(C + D, E)
+  p4 = strassens(D, G - E)
+  p5 = strassens(A + D, E + H)
+  p6 = strassens(B - D, G + H)
+  p7 = strassens(A - C, E + F)
+
+  AE_BG = p5 + p4 - p2 + p6
+  AF_BH = p1 + p2
+  CE_DG = p3 + p4
+  CF_DH = p5 + p1 - p3 - p7
+
+  # Combine 4 sub matrices into 1 before returning
+  return np.vstack([np.hstack([AE_BG, AF_BH]), np.hstack([CE_DG, CF_DH])])
+
+
+# Matrix size
+n = 16384
+
+# Initialize array nxn with random numbers 1 - 10
+m1 = np.random.randint(1, 5, size =(n, n)) 
+m2 = np.random.randint(1, 5, size =(n, n))
+
+start_time = time.time()
+answer = strassens(m1, m2)
+time = time.time() - start_time
+print("Recursive strassens finished in %s seconds" % time)
+
+    
