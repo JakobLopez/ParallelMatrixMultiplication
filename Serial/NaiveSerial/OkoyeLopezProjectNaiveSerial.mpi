@@ -1,3 +1,7 @@
+"""
+Nodebechuwu Okoye and Jakob Lopez
+Submit: sbatch OkoyeLopezProjectNaiveScript
+"""
 # Numpy is a library for fast array/matrix operations
 import numpy as np
 import time
@@ -7,7 +11,7 @@ def naive(m1, m2):
   return np.matmul(m1, m2)
 
 # Matrix size
-n = 16384
+n = 1024
 
 # Initialize array nxn with random numbers 1 - 5
 m1 = np.random.randint(1, 5, size =(n, n)) 

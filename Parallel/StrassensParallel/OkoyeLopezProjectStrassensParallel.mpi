@@ -1,5 +1,8 @@
+"""
+Nodebechukwu Okoye and Jakob Lopez
+Submit: sbatch OkoyeLopezProjectStrassensParallelScript
+"""
 from mpi4py import MPI
-import multiprocessing as mp
 import numpy as np
 import time
 
@@ -76,7 +79,7 @@ comm = MPI.COMM_WORLD
 rank = comm.Get_rank()
 
 # Size of matrix
-n = 16384
+n = 1024
 
 # Initialize empty matrices
 m1 = np.empty(shape=(n,n), dtype="i")

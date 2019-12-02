@@ -1,3 +1,7 @@
+"""
+Nodebechukwu Okoye and Jakob Lopez
+Submit: sbatch OkoyeLopezProjectNaiveParallelScript
+"""
 import multiprocessing as mp
 import numpy as np
 import time
@@ -15,9 +19,9 @@ def multiply(id):
 	return np.matmul(split_m1[id], m2)	
 
 # Matrix size
-n = 16384
+n = 1024
 
-num_workers = 16
+num_workers = 4
 
 # Initialize array nxn with random numbers 1 - 5
 m1 = np.random.randint(1, 5, size =(n, n)) 

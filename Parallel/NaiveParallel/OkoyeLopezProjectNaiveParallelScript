@@ -24,7 +24,7 @@
 #----------------------------------------------------
 
 #SBATCH -J OkoyeLopezProjectNaiveParallel          # Job name
-#SBATCH -o 16_16384.o%j       # Name of stdout output file
+#SBATCH -o OkoyeLopezProjectNaiveParallel.o%j       # Name of stdout output file
 #SBATCH -e OkoyeLopezProjectNaiveParallel.e%j       # Name of stderr error file
 #SBATCH -p normal          # Queue (partition) name
 #SBATCH -N 1               # Total # of nodes 
@@ -42,6 +42,5 @@ date
 
 # Launch MPI code... 
 module spider python3/3.7.0
-python OkoyeLopezProjectNaiveParallel.py         # Use ibrun instead of mpirun or mpiexec
-
+python OkoyeLopezProjectNaiveParallel.py         
 # ---------------------------------------------------
