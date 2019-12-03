@@ -96,8 +96,6 @@ comm.Bcast(m2, root=0)
 
 p = np.empty(shape=(n//2,n//2), dtype="i")
 
-
-
 if rank is 0:
 	start = time.time()
 	A = top_left(m1)
